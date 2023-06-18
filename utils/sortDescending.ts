@@ -11,10 +11,7 @@ export const sortByPropertyDescending = <T>(
   // countries = (await fetchData()) as DataFetch[];
   let newSort = [...state]
     .sort((a, b) => {
-      if (a[property] === b[property]) {
-        return 0;
-      }
-      return a[property] > b[property] ? 1 : -1;
+      return String(a[property]).localeCompare(String(b[property]));
     })
     .reverse();
   setState(newSort);

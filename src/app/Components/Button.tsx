@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { FC, ReactElement } from 'react';
+import { FC } from 'react';
 
 interface ButtonProps {
   className: string;
-  children?: ReactElement;
+  children?: React.ReactNode;
   onClick(): void;
 }
 

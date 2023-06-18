@@ -1,12 +1,17 @@
 import React from 'react';
 import Text from './Text';
-import { FC } from 'react';
+import { FC, ChangeEvent } from 'react';
+import { DataFetch } from '../../../types/datafetch';
 
 interface InputProps {
   className: string;
   placeholder: string;
   label?: string;
   type: string;
+  inputInitialValue: string;
+  setInputValue: React.Dispatch<React.SetStateAction<string>>;
+  initialData: DataFetch[];
+  setSortedCountries: React.Dispatch<React.SetStateAction<DataFetch[]>>;
 }
 
 const Input: FC<InputProps> = ({
@@ -14,11 +19,37 @@ const Input: FC<InputProps> = ({
   placeholder,
   label,
   type,
+  inputInitialValue,
+  setInputValue,
+  initialData,
+  setSortedCountries,
 }): JSX.Element => {
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    setInputValue(value);
+
+    const filteredDataFromSearchBar = initialData.filter((country) => {
+      const searchValue = value.toLowerCase();
+
+      return (
+        country.name.toLowerCase().includes(searchValue) ||
+        country.area.toString().includes(searchValue) ||
+        country.region.toLowerCase().includes(searchValue)
+      );
+    });
+
+    setSortedCountries(filteredDataFromSearchBar);
+  };
   return (
     <div>
       {label && <label>{label}</label>}
-      <input className={className} placeholder={placeholder} type={type} />
+      <input
+        onChange={handleInputChange}
+        className={className}
+        placeholder={placeholder}
+        type={type}
+        value={inputInitialValue}
+      />
     </div>
   );
 };
