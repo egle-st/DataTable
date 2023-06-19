@@ -1,4 +1,4 @@
-import { DataFetch } from '../../countries/types/datafetch';
+import { DataFetch } from '@/types/datafetch';
 
 export const fetchData = async () => {
   try {
@@ -6,7 +6,7 @@ export const fetchData = async () => {
       'https://restcountries.com/v2/all?fields=name,region,area',
       { cache: 'no-store' }
     );
-    const data: DataFetch[] = await response.json();
+    const data = (await response.json()) as DataFetch[];
     return data;
   } catch (error) {
     console.error('Error fetching data:', error);

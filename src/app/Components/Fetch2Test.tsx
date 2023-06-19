@@ -1,8 +1,9 @@
-import { sortByPropertyAscending } from '../../../utils/sortAscending';
-import { sortByPropertyDescending } from '../../../utils/sortDescending';
 import { FC } from 'react';
-import Button from './Button';
-import Text from './Text';
+import {
+  sortByPropertyAscending,
+  sortByPropertyDescending,
+} from '@/utils/index';
+import { Button, Text } from '@/Components/index';
 
 interface DataFetch2 {
   season: string;

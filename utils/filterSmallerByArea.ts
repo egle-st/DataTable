@@ -1,6 +1,5 @@
-import { fetchData } from './fetchData';
-import { DataFetch } from '../types/datafetch';
 import React from 'react';
+import { DataFetch } from '@/types/datafetch';
 
 export const filterSmallerByArea = <T>(
   state: DataFetch[],
@@ -17,8 +16,6 @@ export const filterSmallerByArea = <T>(
   const filterSmallerThanCountry = [...state].filter((country) => {
     return country.area < filterCountryArea[0];
   });
-  // let countries: DataFetch[] | undefined;
-  // countries = (await fetchData()) as DataFetch[];
   const newSort = [...filterSmallerThanCountry].sort((a, b) => {
     return a.name.localeCompare(b.name);
   });

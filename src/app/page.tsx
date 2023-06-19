@@ -1,42 +1,34 @@
 'use client';
 
-import Text from './Components/Text';
-import Input from './Components/Input';
-import Fetch from './Components/Fetch';
-import { useState } from 'react';
-import { DataFetch } from '../../types/datafetch';
-import { fetchData } from '../../utils/fetchData';
-import Fetch2Test from './Components/Fetch2Test';
+import { useState, useEffect } from 'react';
+import { Text, Input, Fetch } from '@/Components/index';
+import { DataFetch } from '@/types/datafetch';
+import { fetchData } from '@/utils/fetchData';
 
-interface DataFetch2 {
-  season: string;
-  number: number;
-}
 export default function Home() {
-  const object1: DataFetch[] = [
-    { name: 'Led Tasso', area: 30, region: 'hello' },
-    {
-      name: 'Ted Lasso',
-      area: 256,
-      region: 'goodbye',
-    },
-    { name: 'Coach Beard', area: 122, region: 'hey' },
-    { name: 'abc', area: 45, region: 'hey' },
-    { name: 'jk', area: 6, region: 'goodbye' },
-  ];
+  useEffect(() => {
+    const fetchDataInfo = async () => {
+      const response = await fetchData();
+      const sortedCountries = response as DataFetch[];
+      setSortedCountries(sortedCountries);
+    };
 
-  const object2: DataFetch2[] = [
-    { season: 'summer', number: 125 },
-    { season: 'autumn', number: 3 },
-  ];
-  // const initialData = (await fetchData()) as DataFetch[];
-  const [sortedCountries, setSortedCountries] = useState<DataFetch[]>(object1);
-  const initialData: DataFetch[] = object1;
-  useState<DataFetch[]>(object1);
-  const [sortedCountries2, setSortedCountries2] =
-    useState<DataFetch2[]>(object2);
+    fetchDataInfo();
+  }, []);
+
+  useEffect(() => {
+    const fetchDataInfo2 = async () => {
+      const response2 = await fetchData();
+      const initialData = response2 as DataFetch[];
+      setInitialData(initialData);
+    };
+
+    fetchDataInfo2();
+  }, []);
+
+  const [sortedCountries, setSortedCountries] = useState<DataFetch[]>([]);
+  const [initialData, setInitialData] = useState<DataFetch[]>([]);
   const [optionMenuVisible, setOptionMenu] = useState(false);
-
   const [inputInitialValue, setInputValue] = useState('');
 
   return (
@@ -61,10 +53,6 @@ export default function Home() {
               menuVisible={optionMenuVisible}
               changeOptionMenuToVisible={setOptionMenu}
               initialData={initialData}
-            />
-            <Fetch2Test
-              countriesData={sortedCountries2}
-              setUpdatedCountries={setSortedCountries2}
             />
           </div>
         </div>

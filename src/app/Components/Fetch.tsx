@@ -1,16 +1,14 @@
 import React, { FC } from 'react';
-import { fetchData } from '../../../utils/fetchData';
-import { DataFetch } from '../../../types/datafetch';
-import Text from '../Components/Text';
-import { useEffect, useState } from 'react';
-import Button from './Button';
 import { BsSortAlphaDown, BsSortAlphaDownAlt } from 'react-icons/bs';
 import { AiOutlineControl } from 'react-icons/ai';
-import { sortByPropertyAscending } from '../../../utils/sortAscending';
-import { sortByPropertyDescending } from '../../../utils/sortDescending';
-import OptionMenu from './OptionMenu';
-import { filterInRegion } from '../../../utils/filterInRegion';
-import { filterSmallerByArea } from '../../../utils/filterSmallerByArea';
+import { DataFetch } from '@/types/datafetch';
+import { Text, Button, OptionMenu } from '@/Components/index';
+import {
+  sortByPropertyAscending,
+  sortByPropertyDescending,
+  filterInRegion,
+  filterSmallerByArea,
+} from '@/utils/index';
 
 interface FetchedData {
   countriesData: DataFetch[];
@@ -19,7 +17,6 @@ interface FetchedData {
   changeOptionMenuToVisible: React.Dispatch<React.SetStateAction<boolean>>;
   initialData: DataFetch[];
 }
-// let countriesData: DataFetch[] | undefined;
 const Fetch: FC<FetchedData> = ({
   countriesData,
   setUpdatedCountries,
@@ -38,12 +35,12 @@ const Fetch: FC<FetchedData> = ({
   };
 
   const handleOptionMenuButton1 = () => {
-    filterSmallerByArea(initialData, setUpdatedCountries, 'Ted Lasso');
+    filterSmallerByArea(initialData, setUpdatedCountries, 'Lithuania');
     changeOptionMenuToVisible(false);
   };
 
   const handleOptionMenuButton2 = () => {
-    filterInRegion(initialData, setUpdatedCountries, 'goodbye');
+    filterInRegion(initialData, setUpdatedCountries, 'Oceania');
     changeOptionMenuToVisible(false);
   };
   return (

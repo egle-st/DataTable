@@ -1,7 +1,5 @@
-import React from 'react';
-import Text from './Text';
-import { FC, ChangeEvent } from 'react';
-import { DataFetch } from '../../../types/datafetch';
+import React, { FC, ChangeEvent } from 'react';
+import { DataFetch } from '@/types/datafetch';
 
 interface InputProps {
   className: string;
@@ -33,7 +31,7 @@ const Input: FC<InputProps> = ({
 
       return (
         country.name.toLowerCase().includes(searchValue) ||
-        country.area.toString().includes(searchValue) ||
+        String(country.area).toLowerCase().includes(searchValue) ||
         country.region.toLowerCase().includes(searchValue)
       );
     });
