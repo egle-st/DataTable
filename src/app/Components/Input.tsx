@@ -10,6 +10,8 @@ interface InputProps {
   setInputValue: React.Dispatch<React.SetStateAction<string>>;
   initialData: DataFetch[];
   setSortedCountries: React.Dispatch<React.SetStateAction<DataFetch[]>>;
+  ariaLabel: string;
+  onFocus: React.FocusEventHandler<HTMLInputElement>;
 }
 
 const Input: FC<InputProps> = ({
@@ -21,6 +23,8 @@ const Input: FC<InputProps> = ({
   setInputValue,
   initialData,
   setSortedCountries,
+  ariaLabel,
+  onFocus,
 }): JSX.Element => {
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
@@ -42,6 +46,8 @@ const Input: FC<InputProps> = ({
     <div>
       {label && <label>{label}</label>}
       <input
+        onFocus={onFocus}
+        aria-label={ariaLabel}
         onChange={handleInputChange}
         className={className}
         placeholder={placeholder}

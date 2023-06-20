@@ -12,7 +12,10 @@ const OptionMenu: FC<OptionsProps> = ({
   menuVisible,
 }): JSX.Element => {
   return (
-    <div>{menuVisible && <div className={className}>{children}</div>}</div>
+    <div role='Dropdown menu' aria-label='menu'>
+      <div></div>
+      <div>{menuVisible && <div className={className}>{children}</div>}</div>
+    </div>
   );
 };
 
