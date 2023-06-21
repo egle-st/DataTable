@@ -11,6 +11,7 @@ export default function Home() {
       const response = await fetchData();
       const sortedCountries = response as DataFetch[];
       setSortedCountries(sortedCountries);
+      setFetchedDataLength(sortedCountries.length);
     };
 
     fetchDataInfo();
@@ -21,9 +22,17 @@ export default function Home() {
       const response2 = await fetchData();
       const initialData = response2 as DataFetch[];
       setInitialData(initialData);
+      setFetchedDataLength(initialData.length);
     };
 
     fetchDataInfo2();
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   }, []);
 
   const [sortedCountries, setSortedCountries] = useState<DataFetch[]>([]);
@@ -38,11 +47,13 @@ export default function Home() {
     firstCountryIndex,
     lastCountryIndex
   );
-  const fetchDataLength = initialData.length;
+  const [fetchDataLength, setFetchedDataLength] = useState(initialData.length);
+  // const fetchDataLength = initialData.length;
   const resetDataOnInputFocus = () => {
     setInputValue('');
     setSortedCountries(initialData);
     setCurrentPage(1);
+    setFetchedDataLength(initialData.length);
   };
 
   return (
@@ -71,6 +82,7 @@ export default function Home() {
               changeOptionMenuToVisible={setOptionMenu}
               initialData={initialData}
               setCurrentPage={setCurrentPage}
+              setFetchedDataLength={setFetchedDataLength}
             />
           </div>
         </div>

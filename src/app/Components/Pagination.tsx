@@ -19,16 +19,29 @@ const Pagination: FC<PaginationProps> = ({
     pages.push(i);
   }
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
   const handlePreviousPageButton = () => {
     if (currentPage !== 1) {
       setCurrentPage(currentPage - 1);
+      scrollToTop();
     }
   };
 
   const handleNextPageButton = () => {
     if (currentPage !== pages.length) {
       setCurrentPage(currentPage + 1);
+      scrollToTop();
     }
+  };
+
+  const handleButtonClick = (page: number) => {
+    setCurrentPage(page);
+    scrollToTop();
   };
 
   return (
@@ -36,14 +49,14 @@ const Pagination: FC<PaginationProps> = ({
       <Button
         onClick={handlePreviousPageButton}
         ariaLabel='Previous page button'
-        className='bg-blue-900 m-1 p-1 rounded-full active:bg-blue-800'
+        className=' bg-blue-900 m-1 p-1 rounded-full active:bg-blue-800'
       >
         <Text content='<< Previous' className='text-white text-xs p-1' />
       </Button>
       {pages.map((page) => {
         return (
           <Button
-            onClick={() => setCurrentPage(page)}
+            onClick={() => handleButtonClick(page)}
             ariaLabel={`Page number is ${page}`}
             className={`${
               page === currentPage ? 'bg-blue-700' : 'bg-blue-900'

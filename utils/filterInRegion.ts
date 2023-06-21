@@ -4,7 +4,8 @@ import { DataFetch } from '@/types/datafetch';
 export const filterInRegion = <T>(
   state: DataFetch[],
   setState: React.Dispatch<React.SetStateAction<DataFetch[]>>,
-  countryRegion: string
+  countryRegion: string,
+  setState2: React.Dispatch<React.SetStateAction<number>>
 ) => {
   const filterCountriesInRegion = [...state].filter((country) => {
     return country.region === countryRegion;
@@ -13,4 +14,5 @@ export const filterInRegion = <T>(
     return a.name.localeCompare(b.name);
   });
   setState(newSort);
+  setState2(newSort.length);
 };

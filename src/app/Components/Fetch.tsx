@@ -17,6 +17,7 @@ interface FetchedData {
   changeOptionMenuToVisible: React.Dispatch<React.SetStateAction<boolean>>;
   initialData: DataFetch[];
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+  setFetchedDataLength: React.Dispatch<React.SetStateAction<number>>;
 }
 const Fetch: FC<FetchedData> = ({
   countriesData,
@@ -25,16 +26,27 @@ const Fetch: FC<FetchedData> = ({
   changeOptionMenuToVisible,
   initialData,
   setCurrentPage,
+  setFetchedDataLength,
 }) => {
   const [ariaExpanded, setAriaExpanded] = useState(false);
 
   const handleSortAscending = () => {
-    sortByPropertyAscending(initialData, setUpdatedCountries, 'name');
+    sortByPropertyAscending(
+      initialData,
+      setUpdatedCountries,
+      'name',
+      setFetchedDataLength
+    );
     setCurrentPage(1);
   };
 
   const handleSortDescending = () => {
-    sortByPropertyDescending(initialData, setUpdatedCountries, 'name');
+    sortByPropertyDescending(
+      initialData,
+      setUpdatedCountries,
+      'name',
+      setFetchedDataLength
+    );
     setCurrentPage(1);
   };
 
@@ -44,13 +56,23 @@ const Fetch: FC<FetchedData> = ({
   };
 
   const handleOptionMenuButton1 = () => {
-    filterSmallerByArea(initialData, setUpdatedCountries, 'Lithuania');
+    filterSmallerByArea(
+      initialData,
+      setUpdatedCountries,
+      'Lithuania',
+      setFetchedDataLength
+    );
     changeOptionMenuToVisible(false);
     setCurrentPage(1);
   };
 
   const handleOptionMenuButton2 = () => {
-    filterInRegion(initialData, setUpdatedCountries, 'Oceania');
+    filterInRegion(
+      initialData,
+      setUpdatedCountries,
+      'Oceania',
+      setFetchedDataLength
+    );
     changeOptionMenuToVisible(false);
     setCurrentPage(1);
   };
@@ -135,10 +157,15 @@ const Fetch: FC<FetchedData> = ({
             ))}
           </ul>
         ) : (
-          <Text
-            content='Loading...'
-            className='text-xl md:text-3xl flex justify-center '
-          />
+          <div className='flex flex-col justify-center gap-6 mt-8'>
+            <div className='flex justify-center items-center'>
+              <div className='w-20 h-20 border-8 border-solid rounded-full border-blue-900 border-t-blue-700 animate-spin'></div>
+            </div>
+            <Text
+              content='Loading...'
+              className='ml-4 text-xl md:text-3xl flex justify-center '
+            />
+          </div>
         )}
       </div>
     </div>

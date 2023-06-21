@@ -3,7 +3,8 @@ import React from 'react';
 export const sortByPropertyDescending = <T>(
   state: T[],
   setState: React.Dispatch<React.SetStateAction<T[]>>,
-  property: keyof T
+  property: keyof T,
+  setState2: React.Dispatch<React.SetStateAction<number>>
 ) => {
   let newSort = [...state]
     .sort((a, b) => {
@@ -11,4 +12,5 @@ export const sortByPropertyDescending = <T>(
     })
     .reverse();
   setState(newSort);
+  setState2(newSort.length);
 };
