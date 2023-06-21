@@ -16,6 +16,7 @@ module.exports = {
       height: {
         127: '120rem',
         128: '128rem',
+        130: '130rem',
       },
       colors: {
         blue15: '#00114b',

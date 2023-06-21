@@ -58,7 +58,7 @@ export default function Home() {
 
   return (
     <main className='flex flex-col items-center justify-start  min-h-screen bg-main-abstract bg-cover min-h-100 bg-no-repeat bg-center'>
-      <div className='flex flex-col items-center justify-center mt-12 h-127 md:h-128 bg-slate-400  w-5/6 sm:w-3/4 bg-opacity-40 backdrop-blur-sm rounded-3xl shadow-2xl'>
+      <div className='flex flex-col items-center justify-center mt-12 h-130 2xl:h-128  bg-slate-400  w-5/6 sm:w-3/4 bg-opacity-40 backdrop-blur-sm rounded-3xl shadow-2xl'>
         <div className='flex flex-col items-center text-white p-6 h-full w-full overflow-hidden'>
           <div className='flex justify-center lg:justify-start self-center md:self-start m-4 w-full'>
             <Input

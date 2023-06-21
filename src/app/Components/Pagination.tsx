@@ -34,8 +34,8 @@ const Pagination: FC<PaginationProps> = ({
 
   const handleNextPageButton = () => {
     if (currentPage !== pages.length) {
-      setCurrentPage(currentPage + 1);
       scrollToTop();
+      setCurrentPage(currentPage + 1);
     }
   };
 
@@ -49,30 +49,35 @@ const Pagination: FC<PaginationProps> = ({
       <Button
         onClick={handlePreviousPageButton}
         ariaLabel='Previous page button'
-        className=' bg-blue-900 m-1 p-1 rounded-full active:bg-blue-800'
+        className={`${currentPage === 1 ? 'hidden' : ''}  m-1 p-1  `}
       >
-        <Text content='<< Previous' className='text-white text-xs p-1' />
+        <Text content='<' className='text-white text-lg p-1' />
       </Button>
       {pages.map((page) => {
         return (
           <Button
             onClick={() => handleButtonClick(page)}
             ariaLabel={`Page number is ${page}`}
-            className={`${
-              page === currentPage ? 'bg-blue-700' : 'bg-blue-900'
-            } m-1 px-1 py-2  rounded-full w-8`}
+            className={`
+               m-1   rounded-full w-8`}
             key={`1${page}`}
           >
-            <Text className='text-white text-xs' content={`${page}`} />
+            <Text
+              className={`${
+                page === currentPage ? 'bg-blue-700' : ''
+              }  text-s rounded-full p-1 text-white`}
+              content={`${page}`}
+            />
           </Button>
         );
       })}
+
       <Button
         onClick={handleNextPageButton}
         ariaLabel='Next page button'
-        className='bg-blue-900 m-1 p-1 rounded-full active:bg-blue-800'
+        className={`${currentPage === pages.length ? 'hidden' : ''} m-1 p-1  `}
       >
-        <Text content='Next >>' className='text-white text-xs p-1' />
+        <Text content='>' className='text-white text-lg p-1' />
       </Button>
     </div>
   );
