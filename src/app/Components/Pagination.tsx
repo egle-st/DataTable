@@ -25,6 +25,13 @@ const Pagination: FC<PaginationProps> = ({
       behavior: 'smooth',
     });
   };
+
+  const handleFirstPageButton = () => {
+    if (currentPage !== 1) {
+      setCurrentPage(1);
+      scrollToTop();
+    }
+  };
   const handlePreviousPageButton = () => {
     if (currentPage !== 1) {
       setCurrentPage(currentPage - 1);
@@ -39,6 +46,13 @@ const Pagination: FC<PaginationProps> = ({
     }
   };
 
+  const handleLastPageButton = () => {
+    if (currentPage !== pages.length) {
+      setCurrentPage(pages.length);
+      scrollToTop();
+    }
+  };
+
   const handleButtonClick = (page: number) => {
     setCurrentPage(page);
     scrollToTop();
@@ -47,6 +61,13 @@ const Pagination: FC<PaginationProps> = ({
   return (
     <div>
       <Button
+        onClick={handleFirstPageButton}
+        ariaLabel='Go to First page button'
+        className={`${currentPage === 1 ? 'hidden' : ''} m-1 p-1`}
+      >
+        <Text content='<<' className='text-white text-lg p-1' />
+      </Button>
+      <Button
         onClick={handlePreviousPageButton}
         ariaLabel='Previous page button'
         className={`${currentPage === 1 ? 'hidden' : ''}  m-1 p-1  `}
@@ -54,22 +75,24 @@ const Pagination: FC<PaginationProps> = ({
         <Text content='<' className='text-white text-lg p-1' />
       </Button>
       {pages.map((page) => {
-        return (
-          <Button
-            onClick={() => handleButtonClick(page)}
-            ariaLabel={`Page number is ${page}`}
-            className={`
+        if (currentPage === page) {
+          return (
+            <Button
+              onClick={() => handleButtonClick(page)}
+              ariaLabel={`Page number is ${page}`}
+              className={`
                m-1   rounded-full w-8`}
-            key={`1${page}`}
-          >
-            <Text
-              className={`${
-                page === currentPage ? 'bg-blue-700' : ''
-              }  text-s rounded-full p-1 text-white`}
-              content={`${page}`}
-            />
-          </Button>
-        );
+              key={`1${page}`}
+            >
+              <Text
+                className={`${
+                  page === currentPage ? 'bg-blue-700' : ''
+                }  text-s rounded-full p-1 text-white`}
+                content={`${page}`}
+              />
+            </Button>
+          );
+        }
       })}
 
       <Button
@@ -78,6 +101,13 @@ const Pagination: FC<PaginationProps> = ({
         className={`${currentPage === pages.length ? 'hidden' : ''} m-1 p-1  `}
       >
         <Text content='>' className='text-white text-lg p-1' />
+      </Button>
+      <Button
+        onClick={handleLastPageButton}
+        ariaLabel='Go to Last page button'
+        className={`${currentPage === pages.length ? 'hidden' : ''} m-1 p-1`}
+      >
+        <Text content='>>' className='text-white text-lg p-1' />
       </Button>
     </div>
   );
